@@ -4,7 +4,7 @@
 #include "libft.h"
 
 int main() {
-    printf("%d\n",atoi("922337203685477580800"));
-   printf("%d",ft_atoi("922337203685477580800"));
+    printf("%c\n",*(ft_substr("Bonjour comment ca va?", 5, 20)+7));
+   
             return 0;
 }
