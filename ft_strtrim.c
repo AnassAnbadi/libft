@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aanbadi <aanbadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 12:15:25 by abahadda          #+#    #+#             */
-/*   Updated: 2024/11/10 23:57:20 by aanbadi          ###   ########.fr       */
+/*   Created: 2024/11/11 17:03:00 by aanbadi           #+#    #+#             */
+/*   Updated: 2024/11/16 20:20:24 by aanbadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 	char	*str;
 
-	if (!s1 || !set)
+	if (!s1)
 		return (NULL);
 	start = 0;
 	end = ft_strlen(s1) - 1;
