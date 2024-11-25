@@ -6,7 +6,7 @@
 /*   By: aanbadi <aanbadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 00:51:14 by aanbadi           #+#    #+#             */
-/*   Updated: 2024/11/15 21:34:32 by aanbadi          ###   ########.fr       */
+/*   Updated: 2024/11/19 17:49:43 by aanbadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t				i;
-	const unsigned char	*ptr = (const unsigned char *)s;
+	const unsigned char	*ptr;
 
+	ptr = (const unsigned char *)s;
 	i = 0;
 	while (i < n)
 	{

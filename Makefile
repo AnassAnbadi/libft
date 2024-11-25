@@ -11,7 +11,7 @@ BSRCS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 NAME = libft.a
 
 
@@ -21,7 +21,7 @@ $(NAME) : $(OBJS)
 	ar -rc $(NAME) $(OBJS)
 
 %.o : %.c libft.h
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 fclean : clean
 	rm -f $(NAME)
@@ -34,4 +34,4 @@ clean :
 
 re : fclean all
 
-.PHONY : clean
+.PHONY : all clean

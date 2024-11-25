@@ -6,7 +6,7 @@
 /*   By: aanbadi <aanbadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:02:40 by aanbadi           #+#    #+#             */
-/*   Updated: 2024/11/16 19:40:25 by aanbadi          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:11:53 by aanbadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,34 @@
 static int	count_words(const char *s, char c)
 {
 	int	count;
-	int	flag;
 
-	if (!s)
-		return (0);
 	count = 0;
-	flag = 0;
 	while (*s)
 	{
-		if (*s == c)
-			flag = 0;
-		else if (!flag)
-		{
-			flag = 1;
+		while (*s == c)
+			s++;
+		if (*s)
 			count++;
-		}
-		s++;
+		while (*s && *s != c)
+			s++;
 	}
 	return (count);
 }
 
-static int	get_len(const char *s, char c)
+static char	*allocate_word(const char **s, char c)
 {
-	size_t	i;
+	int		len;
+	char	*word;
 
-	i = 0;
-	while (*s && *s != c)
-	{
-		i++;
-		s++;
-	}
-	return (i);
+	len = 0;
+	while ((*s)[len] && (*s)[len] != c)
+		len++;
+	word = (char *)malloc((len + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	ft_strlcpy(word, *s, len + 1);
+	*s += len;
+	return (word);
 }
 
 static void	free_array(char **arr)
@@ -53,7 +50,7 @@ static void	free_array(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (arr && arr[i])
 	{
 		free(arr[i]);
 		i++;
@@ -61,37 +58,40 @@ static void	free_array(char **arr)
 	free(arr);
 }
 
-static void	skip_delim(const char **s, char c)
+static int	fill_array(char **res, const char *s, char c)
 {
-	while (**s == c)
-		(*s)++;
+	int	i;
+
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s)
+		{
+			res[i] = allocate_word(&s, c);
+			if (!res[i])
+			{
+				free_array(res);
+				return (0);
+			}
+			i++;
+		}
+	}
+	res[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(const char *s, char c)
 {
 	char	**res;
-	size_t	i;
-	size_t	y;
 
+	if (!s)
+		return (NULL);
 	res = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
-	i = 0;
-	while (s && *s && res)
-	{
-		y = 0;
-		skip_delim(&s, c);
-		if (!*s)
-			break ;
-		res[i] = (char *)malloc((get_len(s, c) + 1) * sizeof(char));
-		if (!res[i])
-		{
-			free_array(res);
-			return (NULL);
-		}
-		while (*s && *s != c)
-			res[i][y++] = *s++;
-		res[i++][y] = '\0';
-	}
-	if (res)
-		res[i] = NULL;
+	if (!res)
+		return (NULL);
+	if (!fill_array(res, s, c))
+		return (NULL);
 	return (res);
 }

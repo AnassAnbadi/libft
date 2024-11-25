@@ -6,7 +6,7 @@
 /*   By: aanbadi <aanbadi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:12:45 by aanbadi           #+#    #+#             */
-/*   Updated: 2024/11/11 17:12:45 by aanbadi          ###   ########.fr       */
+/*   Updated: 2024/11/22 00:40:59 by aanbadi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s || !f)
 		return (NULL);
-	len = 0;
 	i = 0;
 	len = ft_strlen(s);
 	result = (char *)malloc(len + 1);
